@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermart Grocery Sales</title>
+    <style>
+        /* Base Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #f0f8ff, #d4eaff);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: #f00a35;
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Contact Us button (Right side) */
+        .contact-button {
+            position: absolute;
+            top: 70px; /* Adjust to place it below the header */
+            right: 20px; /* Move it to the right */
+            background: #004099;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .contact-button:hover {
+            background: #003070;
+        }
+
+        .contact-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Contact Details Section (hidden by default) */
+        .contact-details {
+            display: none;
+            position: absolute;
+            top: 120px; /* Position below the button */
+            right: 20px; /* Align with the button on the right */
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+        }
+
+        .contact-details p {
+            margin: 10px 0;
+        }
+
+        .contact-details .email,
+        .contact-details .phone {
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Card Design */
+        .card {
+            background: white;
+            width: 300px;
+            margin: 15px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            background: #0056b3;
+            color: white;
+            margin: 0;
+            padding: 15px;
+            font-size: 1.25rem;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .card form {
+            padding: 20px;
+        }
+
+        .card select,
+        .card button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .card select:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+        }
+
+        .card button {
+            background: #0056b3;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .card button:hover {
+            background: #004099;
+        }
+
+        .card button:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #003d7a;
+            color: white;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Supermart Grocery Sales
+        <!-- Contact Us Button -->
+        <button class="contact-button" onclick="toggleContactDetails()">Contact Us</button>
+    </header>
+
+    <!-- Contact Details (hidden by default) -->
+    <div class="contact-details" id="contactDetails">
+        <p class="phone">Phone: 7799346592</p>
+        <p class="email">Email: ajays058147@gmail.com</p>
+    </div>
+
+    <main>
+        <!-- Month and Year Card -->
+        <div class="card">
+            <h3>View Data by Month and Year</h3>
+            <form action="{{ url_for('month_view') }}" method="POST">
+                <select name="month" required>
+                    <option value="" disabled selected>Select a Month</option>
+                    {% for month in months %}
+                        <option value="{{ month }}">{{ month }}</option>
+                    {% endfor %}
+                </select>
+                <select name="year" required>
+                    <option value="" disabled selected>Select a Year</option>
+                    {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                    {% endfor %}
+                </select>
+                <select name="chart_type" required>
+                    <option value="bar">Bar Chart</option>
+                    <option value="pie">Pie Chart</option>
+                </select>
+                <button type="submit">Show Data</button>
+            </form>
+        </div>
+
+        <!-- Year Card -->
+        <div class="card">
+            <h3>View Data by Year</h3>
+            <form action="{{ url_for('year_view') }}" method="POST">
+                <select name="year" required>
+                    <option value="" disabled selected>Select a Year</option>
+                    {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                    {% endfor %}
+                </select>
+                <select name="chart_type" required>
+                    <option value="bar">Bar Chart</option>
+                    <option value="pie">Pie Chart</option>
+                </select>
+                <button type="submit">Show Data</button>
+            </form>
+        </div>
+
+        <!-- State Card -->
+        <div class="card">
+            <h3>View Data by State</h3>
+            <form action="{{ url_for('state_view') }}" method="POST">
+                <select name="state" required>
+                    <option value="" disabled selected>Select a State</option>
+                    {% for state in states %}
+                        <option value="{{ state }}">{{ state }}</option>
+                    {% endfor %}
+                </select>
+                <select name="chart_type" required>
+                    <option value="bar">Bar Chart</option>
+                    <option value="pie">Pie Chart</option>
+                </select>
+                <button type="submit">Show Data</button>
+            </form>
+        </div>
+
+        <!-- City Card -->
+        <div class="card">
+            <h3>View Data by City</h3>
+            <form action="{{ url_for('city_view') }}" method="POST">
+                <select name="city" required>
+                    <option value="" disabled selected>Select a City</option>
+                    {% for city in cities %}
+                        <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
+                </select>
+                <select name="chart_type" required>
+                    <option value="bar">Bar Chart</option>
+                    <option value="pie">Pie Chart</option>
+                </select>
+                <button type="submit">Show Data</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Supermart Analytics | <a href="#">Privacy Policy</a>
+    </footer>
+
+    <script>
+        // Function to toggle the display of contact details
+        function toggleContactDetails() {
+            var contactDetails = document.getElementById('contactDetails');
+            if (contactDetails.style.display === 'block') {
+                contactDetails.style.display = 'none';
+            } else {
+                contactDetails.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

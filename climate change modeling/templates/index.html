@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Sentiment Analysis</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background-color: #003366;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            padding-top: 30px;
+            padding-right: 10px;
+            box-sizing: border-box;
+            border-right: 2px solid #ffffff;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s, padding-left 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #005bb5;
+            padding-left: 20px;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .main-content h1 {
+            color: #007bff;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+                padding-top: 20px;
+            }
+
+            .main-content {
+                margin-left: 210px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        Climate Sentiment Analysis
+    </header>
+
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+        <h3>Navigation</h3>
+        <a href="{{ url_for('sentiment_analysis') }}">Sentiment Analysis</a>
+        <a href="{{ url_for('keyword_frequency') }}">Keyword Frequency</a>
+        <a href="{{ url_for('future_prediction') }}">Future Prediction</a>
+        <a href="{{ url_for('about') }}">About</a>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <h1>Welcome to Climate Sentiment Analysis</h1>
+        <p>Here you can explore various tools for analyzing sentiment on climate-related data. Use the sidebar to navigate through the sections.</p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        &copy; 2025 Climate Sentiment Analytics | <a href="#">Privacy Policy</a>
+    </footer>
+
+</body>
+</html>
